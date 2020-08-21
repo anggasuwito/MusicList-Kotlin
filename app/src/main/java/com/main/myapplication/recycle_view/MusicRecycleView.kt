@@ -6,17 +6,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
-import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.main.myapplication.R
-import com.main.myapplication.classes.Music
+import com.main.myapplication.room.music.Music
 import kotlinx.android.synthetic.main.music_list_recycle_view_layout.view.*
 
 class MusicRecycleView(
-    private val musicList: MutableList<Music>
+    private val musicList: List<Music>
 ) :
     RecyclerView.Adapter<MusicViewHolder>() {
     lateinit var navController: NavController
@@ -34,6 +33,8 @@ class MusicRecycleView(
         val musicTitle = musicList[position].musicTitle
         val musicArtistName = musicList[position].musicArtistName
         val musicImageURL = musicList[position].musicImage
+        val musicId = musicList[position].musicId.toString()
+        println("INI $musicId $musicTitle $musicArtistName $musicImageURL")
         holder.musicTitle.text = musicTitle
         holder.musicArtistName.text = musicArtistName
         holder.musicImage.load(musicImageURL)
@@ -43,7 +44,8 @@ class MusicRecycleView(
                 R.id.action_musicHomeFragment_to_detailMusicFragment, bundleOf(
                     "musicTitle" to musicTitle,
                     "musicArtistName" to musicArtistName,
-                    "musicImageURL" to musicImageURL
+                    "musicImageURL" to musicImageURL,
+                    "musicId" to musicId
                 )
             )
         }
@@ -54,5 +56,4 @@ class MusicViewHolder(v: View) : RecyclerView.ViewHolder(v) {
     val musicImage = v.findViewById<ImageView>(R.id.musicImage)
     val musicTitle = v.findViewById<TextView>(R.id.musicTitle)
     val musicArtistName = v.findViewById<TextView>(R.id.musicArtistName)
-
 }

@@ -7,13 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import com.main.myapplication.model.MusicViewModel
 import com.main.myapplication.R
+import com.main.myapplication.model.SongViewModel
 import com.main.myapplication.room.music.Music
+import com.main.myapplication.room.song.Song
 import kotlinx.android.synthetic.main.fragment_new_music.*
+import kotlinx.android.synthetic.main.fragment_new_song.*
 
-class NewMusicFragment : Fragment(), View.OnClickListener {
-    val musicViewModel by activityViewModels<MusicViewModel>()
+class NewSongFragment : Fragment(), View.OnClickListener {
+    val songViewModel by activityViewModels<SongViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -23,36 +25,36 @@ class NewMusicFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_music, container, false)
+        return inflater.inflate(R.layout.fragment_new_song, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        saveNewMusic.setOnClickListener(this)
+        saveNewSong.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
-        val musicArtistName = musicArtistName.text.toString()
-        val musicTitle = musicTitle.text.toString()
-        val musicImage = musicImage.text.toString()
+        val songNameInput = songNameInput.text.toString()
+        val songDurationInput = songDurationInput.text.toString()
+        val musicId = arguments?.getString("musicId")!!.toInt()
         when (v) {
-            saveNewMusic -> {
-                if (musicArtistName == "" || musicTitle == "" || musicImage == "") {
+            saveNewSong -> {
+                if (songNameInput == "" || songDurationInput == "") {
                     Toast.makeText(
                         activity,
                         "Cant input empty form, fill all the form",
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
-                    musicViewModel.addMusicList(
-                        Music(
-                            musicArtistName = musicArtistName,
-                            musicTitle = musicTitle,
-                            musicImage = musicImage
+                    songViewModel.addSongList(
+                        Song(
+                            songName = songNameInput,
+                            songDuration = songDurationInput,
+                            songMusicId = musicId
                         )
                     )
-                    Toast.makeText(activity, "Added new music", Toast.LENGTH_SHORT).show()
-                    activity?.onBackPressed()
+                    Toast.makeText(activity, "Added new song list", Toast.LENGTH_SHORT).show()
+//                    activity?.onBackPressed()
                 }
             }
         }

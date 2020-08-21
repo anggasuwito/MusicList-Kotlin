@@ -11,7 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.main.myapplication.recycle_view.MusicRecycleView
-import com.main.myapplication.view_model.MusicViewModel
+import com.main.myapplication.model.MusicViewModel
 import com.main.myapplication.R
 import kotlinx.android.synthetic.main.fragment_music_home.*
 
@@ -41,12 +41,10 @@ class MusicHomeFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        musicListRecycleView.layoutManager = LinearLayoutManager(activity)
-        musicRecycleView =
-            MusicRecycleView(musicViewModel.musicLiveData.value!!)
-        musicListRecycleView.adapter = musicRecycleView
-        musicViewModel.musicLiveData.observe(viewLifecycleOwner, Observer {
-            musicRecycleView.notifyDataSetChanged()
+        musicListRecycleView.layoutManager = LinearLayoutManager(this.context)
+        musicViewModel.musicList.observe(viewLifecycleOwner, Observer {
+            musicRecycleView = MusicRecycleView(it)
+            musicListRecycleView.adapter = musicRecycleView
         })
         addNewMusicButton.setOnClickListener(this)
         navController = Navigation.findNavController(view)

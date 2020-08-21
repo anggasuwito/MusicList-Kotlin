@@ -10,6 +10,9 @@
     <action
         android:id="@+id/action_musicHomeFragment_to_detailMusicFragment"
         app:destination="@id/detailMusicFragment" />
+    <action
+        android:id="@+id/action_musicHomeFragment_to_newSongFragment"
+        app:destination="@id/newSongFragment" />
     <fragment
         android:id="@+id/musicHomeFragment"
         android:name="com.main.myapplication.fragments.MusicHomeFragment"
@@ -26,4 +29,9 @@
         android:name="com.main.myapplication.fragments.DetailMusicFragment"
         android:label="fragment_detail_music"
         tools:layout="@layout/fragment_detail_music" />
+    <fragment
+        android:id="@+id/newSongFragment"
+        android:name="com.main.myapplication.fragments.NewSongFragment"
+        android:label="fragment_new_song"
+        tools:layout="@layout/fragment_new_song" />
 </navigation>
