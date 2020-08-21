@@ -54,7 +54,7 @@ class NewSongFragment : Fragment(), View.OnClickListener {
                         )
                     )
                     Toast.makeText(activity, "Added new song list", Toast.LENGTH_SHORT).show()
-//                    activity?.onBackPressed()
+                    activity?.onBackPressed()
                 }
             }
         }

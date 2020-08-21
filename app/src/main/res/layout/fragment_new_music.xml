@@ -29,7 +29,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/musicArtistName"
                     android:layout_width="match_parent"
